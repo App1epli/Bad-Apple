@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Bad Wsp</title>
+    </head>
+    <body>
+        <canvas
+            id="myCanvas"
+            style="background-color: #eee; width: 100%; height: 100%; display: block;">
+        </canvas>
+        <script>
+            const cellSize = 35;
+            const ctx = myCanvas.getContext("2d");
+            const img = new Image();
+            img.src = "img.png"; 
+
+            img.onload = function() {
+                initVideoAndStart();
+            };
+            
+        
+            img.onerror = function() {
+                console.error("Не удалось загрузить изображение .png. Проверьте имя файла.");
+                alert("Ошибка: Файл .png не найден!");
+            }
+
+            const video = document.createElement("video");
+
+            function initVideoAndStart() {
+                video.src = "bad_apple.mp4"; 
+                video.muted = true; 
+                video.loop = true;  
+                video.play().catch(e => console.error("Ошибка запуска видео:", e));
+
+                video.addEventListener("loadeddata", () => {
+                    myCanvas.width = video.videoWidth;
+                    myCanvas.height = video.videoHeight;
+                    animate();
+                });
+            }
+
+
+            function animate(){
+                const {width, height} = myCanvas;
+
+                ctx.drawImage(video, 0, 0, width, height);
+
+
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, width, height);
+
+                const step = cellSize;
+                
+                for(let y = 0; y < height; y += step){
+                    for (let x = 0; x < width; x += step){
+                        const i = (y * width + x) * 4;
+            
+                        const brightness = (data[i] + data[i+1] + data[i+2]) / 3;
+
+                        if(brightness < 100){
+                        
+                            const drawX = x - cellSize / 2;
+                            const drawY = y - cellSize / 2;
+
+                            ctx.drawImage(img, drawX, drawY, cellSize, cellSize);
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+        </script>
+    </body>
+</html>
