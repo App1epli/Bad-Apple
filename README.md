@@ -19,11 +19,11 @@ This project is my own experimental implementation.
 - 💻 Built as a personal coding playground
 
 
-## 🖼 Demo
+## Apple
 
 <div align="center">
 
-<img src="https://i.pinimg.com/originals/11/3c/37/113c37e46e35619ae54f555f1d7cc92e.gif" width="600"/>
+<img src="https://i.pinimg.com/originals/53/1c/2d/531c2d4dd893a79ff1e021e79afa5932.gif" width="600"/>
 
 </div>
 
