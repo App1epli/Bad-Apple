@@ -1,4 +1,4 @@
-# 🍎 bab-apple
+# 🍎 Bad Apple
 
 A small experimental project inspired by the legendary **Bad Apple** animation.
 
